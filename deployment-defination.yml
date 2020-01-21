@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: nginx-deploy
+  labels: 
+    name: rs-label
+    type: back-end
+spec: 
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  
+  template:
+
+    metadata:
+      name: nginx
+      labels:
+        name: rs-label
+        type: back-end
+
+    spec:
+      containers:
+        - name: nginx-demo
+          image: yogeshraheja/yogeshk8stest
+      nodeSelector:
+        type: back-end
+        tier: front-end
+
+  replicas: 3
+  selector: 
+    matchLabels: 
+      name: rs-label
+      type: back-end
+ 
