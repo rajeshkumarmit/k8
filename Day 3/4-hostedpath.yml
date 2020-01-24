@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jenkins-rajesh
+  labels:
+    app: myapp-rajesh
+spec:
+  containers:
+    - name: jenkins-rajesh
+      image: jenkins/jenkins:lts
+      volumeMounts:
+      - name: jenkins-home
+        mountPath: /var/jenkins_home
+  volumes:
+    - name: jenkins-home
+      hostPath:
+        path: /var/jenkins_home
+        type: Directory
